@@ -40,6 +40,8 @@ describe('GetThreadUseCase', () => {
     const mockThreadRepository = new ThreadRepository();
 
     /** mocking needed function */
+    mockThreadRepository.validateThreadById = jest.fn().mockImplementation(() => Promise.resolve());
+
     mockThreadRepository.getThreadById = jest
       .fn()
       .mockImplementation(() => Promise.resolve(mockDetailThread));
