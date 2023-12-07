@@ -12,7 +12,7 @@ const ServerTestHelper = {
       fullname,
     };
 
-    await this.server.inject({
+    const responseUser = await this.server.inject({
       method: 'POST',
       url: '/users',
       payload: userPayLoad,
@@ -27,13 +27,13 @@ const ServerTestHelper = {
       },
     });
 
-    // const responseUserJson = JSON.parse(responseUser.payload);
     const responseAuthJson = JSON.parse(responseAuth.payload);
+    const responseUserJson = JSON.parse(responseUser.payload);
 
-    // const userId = responseUserJson.data.addedUser.id;
+    const userId = responseUserJson.data.addedUser.id;
     const accessToken = responseAuthJson.data.accessToken;
 
-    return { accessToken };
+    return { accessToken, userId };
   },
 };
 

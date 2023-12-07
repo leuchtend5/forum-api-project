@@ -49,10 +49,6 @@ class ThreadRepositoryPostgres extends ThreadRepository {
 
     return result.rows[0];
   }
-
-  // async getCommentsByThreadId() {
-  //   //
-  // }
 }
 
 module.exports = ThreadRepositoryPostgres;

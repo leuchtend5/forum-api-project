@@ -1,6 +1,7 @@
 const pool = require('../../database/postgres/pool');
 const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
+const CommentsTableTestHelper = require('../../../../tests/CommentsTableTestHelper');
 const container = require('../../container');
 const createServer = require('../createServer');
 const ServerTestHelper = require('../../../../tests/ServerTestHelper');
@@ -40,9 +41,9 @@ describe('/threads endpoint', () => {
       expect(response.statusCode).toEqual(201);
       expect(responseJson.status).toEqual('success');
       expect(responseJson.data).toBeDefined();
-      expect(responseJson.data.id).toBeDefined();
-      expect(responseJson.data.title).toBeDefined();
-      expect(responseJson.data.owner).toBeDefined();
+      expect(responseJson.data.addedThread.id).toBeDefined();
+      expect(responseJson.data.addedThread.title).toBeDefined();
+      expect(responseJson.data.addedThread.owner).toBeDefined();
     });
 
     it('should response 400 when request payload not contain needed property', async () => {
@@ -159,6 +160,7 @@ describe('/threads endpoint', () => {
 
       await UsersTableTestHelper.addUser({});
       await ThreadsTableTestHelper.addThread({});
+      await CommentsTableTestHelper.addComment({});
 
       // Action
       const response = await server.inject({
@@ -177,6 +179,14 @@ describe('/threads endpoint', () => {
         body: 'this is body',
         date: '2023',
         username: 'dicoding',
+        comments: [
+          {
+            id: 'comment-123',
+            username: 'dicoding',
+            date: '2023',
+            content: 'a content',
+          },
+        ],
       });
     });
 
