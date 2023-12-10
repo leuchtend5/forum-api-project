@@ -2,6 +2,7 @@ const pool = require('../../database/postgres/pool');
 const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const CommentsTableTestHelper = require('../../../../tests/CommentsTableTestHelper');
+const RepliesTableTestHelper = require('../../../../tests/RepliesTableTestHelper');
 const container = require('../../container');
 const createServer = require('../createServer');
 const ServerTestHelper = require('../../../../tests/ServerTestHelper');
@@ -161,6 +162,7 @@ describe('/threads endpoint', () => {
       await UsersTableTestHelper.addUser({});
       await ThreadsTableTestHelper.addThread({});
       await CommentsTableTestHelper.addComment({});
+      await RepliesTableTestHelper.addReply({});
 
       // Action
       const response = await server.inject({
@@ -185,6 +187,14 @@ describe('/threads endpoint', () => {
             username: 'dicoding',
             date: '2023',
             content: 'a content',
+            replies: [
+              {
+                id: 'reply-123',
+                username: 'dicoding',
+                date: '2023',
+                content: 'a reply',
+              },
+            ],
           },
         ],
       });
