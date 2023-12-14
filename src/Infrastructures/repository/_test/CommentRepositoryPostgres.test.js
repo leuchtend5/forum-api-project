@@ -43,6 +43,14 @@ describe('CommentRepositoryPostgres', () => {
       // Assert
       const comments = await CommentsTableTestHelper.findCommentById('comment-123');
       expect(comments).toBeDefined();
+      expect(comments).toStrictEqual({
+        id: 'comment-123',
+        thread_id: 'thread-123',
+        owner: 'user-123',
+        content: 'a content',
+        date: comments.date,
+        is_deleted: false,
+      });
       expect(addComment).toStrictEqual(
         new AddedComment({
           id: 'comment-123',
@@ -143,12 +151,14 @@ describe('CommentRepositoryPostgres', () => {
           username: 'dicoding',
           date: '2023',
           content: 'a content',
+          is_deleted: false,
         },
         {
           id: 'comment-234',
           username: 'indonesia',
           date: '2023',
           content: 'second comment',
+          is_deleted: false,
         },
       ]);
     });
@@ -180,12 +190,14 @@ describe('CommentRepositoryPostgres', () => {
           username: 'dicoding',
           date: '2023',
           content: 'a content',
+          is_deleted: false,
         },
         {
           id: 'comment-234',
           username: 'indonesia',
           date: '2024',
           content: '**komentar telah dihapus**',
+          is_deleted: true,
         },
       ]);
     });

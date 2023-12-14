@@ -6,6 +6,7 @@ describe('a DetailReply entity', () => {
     const payload = {
       id: 'reply-123',
       username: 'dicoding',
+      comment_id: 'comment-123',
     };
 
     // Action and Assert
@@ -19,6 +20,7 @@ describe('a DetailReply entity', () => {
       username: true,
       date: '2023',
       content: true,
+      comment_id: 'comment-123',
     };
 
     // Action and Assert
@@ -34,15 +36,17 @@ describe('a DetailReply entity', () => {
       username: 'dicoding',
       date: '2023',
       content: 'a content',
+      comment_id: 'comment-123',
     };
 
     // Action
-    const { id, username, date, content } = new DetailReply(payload);
+    const { id, username, date, content, comment_id } = new DetailReply(payload);
 
     // Assert
     expect(id).toEqual(payload.id);
     expect(username).toEqual(payload.username);
     expect(date).toEqual(payload.date);
     expect(content).toEqual(payload.content);
+    expect(comment_id).toEqual(payload.comment_id);
   });
 });

@@ -52,7 +52,7 @@ class ReplyRepositoryPostgres extends ReplyRepository {
 
   async getReplyByThreadId(threadId) {
     const query = {
-      text: `SELECT replies.id, users.username, replies.date, replies.content, replies.comment_id FROM replies
+      text: `SELECT replies.id, users.username, replies.date, replies.content, replies.comment_id, replies.is_deleted FROM replies
       JOIN users ON users.id = replies.owner
       JOIN comments ON comments.id = replies.comment_id
       JOIN threads ON threads.id = comments.thread_id
@@ -64,13 +64,20 @@ class ReplyRepositoryPostgres extends ReplyRepository {
 
     const result = await this._pool.query(query);
 
-    return result.rows;
+    const modifiedReply = result.rows.map((reply) => {
+      if (reply.is_deleted) {
+        reply.content = '**balasan telah dihapus**';
+      }
+      return reply;
+    });
+
+    return modifiedReply;
   }
 
   async deleteReplyById(id) {
     const query = {
-      text: 'UPDATE replies SET is_deleted = TRUE, content = $2 WHERE id = $1 RETURNING id',
-      values: [id, '**balasan telah dihapus**'],
+      text: 'UPDATE replies SET is_deleted = TRUE WHERE id = $1 RETURNING id',
+      values: [id],
     };
 
     await this._pool.query(query);

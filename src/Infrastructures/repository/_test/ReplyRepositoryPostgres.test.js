@@ -108,7 +108,7 @@ describe('ReplyRepositoryPostgres', () => {
     });
   });
 
-  describe('getReplyByCommentId function', () => {
+  describe('getReplyByThreadId function', () => {
     it('should return an empty array if there is no reply in the comment', async () => {
       // Arrange
       const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {});
@@ -136,17 +136,19 @@ describe('ReplyRepositoryPostgres', () => {
       });
 
       // Action
+      await replyRepositoryPostgres.deleteReplyById('reply-123');
       const replies = await replyRepositoryPostgres.getReplyByThreadId('thread-123');
 
       // Assert
       expect(replies).toHaveLength(2);
-      expect(replies).toStrictEqual([
+      expect(replies).toEqual([
         {
           id: 'reply-123',
           username: 'dicoding',
           date: '2023',
-          content: 'a reply',
+          content: '**balasan telah dihapus**',
           comment_id: 'comment-123',
+          is_deleted: true,
         },
         {
           id: 'reply-234',
@@ -154,6 +156,7 @@ describe('ReplyRepositoryPostgres', () => {
           date: '2023',
           content: 'second reply',
           comment_id: 'comment-123',
+          is_deleted: false,
         },
       ]);
     });

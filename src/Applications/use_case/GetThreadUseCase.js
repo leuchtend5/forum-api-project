@@ -14,10 +14,12 @@ class GetThreadUseCase {
 
     // Combine comments and replies
     const commentsWithReplies = comments.map((comment) => {
+      const { is_deleted, ...commentWithoutIsDeleted } = comment; // to hide is_deleted property
+
       const commentReplies = replies
         .filter((reply) => reply.comment_id === comment.id)
-        .map(({ comment_id, ...replyWithoutCommentId }) => replyWithoutCommentId); // to hide comment_id
-      return { ...comment, replies: commentReplies };
+        .map(({ comment_id, is_deleted, ...replyWithoutCommentId }) => replyWithoutCommentId); // to hide comment_id and is_deleted property
+      return { ...commentWithoutIsDeleted, replies: commentReplies };
     });
 
     return { ...detailThread, comments: commentsWithReplies };
