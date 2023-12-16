@@ -37,10 +37,11 @@ describe('a DetailReply entity', () => {
       date: '2023',
       content: 'a content',
       comment_id: 'comment-123',
+      is_deleted: false,
     };
 
     // Action
-    const { id, username, date, content, comment_id } = new DetailReply(payload);
+    const { id, username, date, content, comment_id, is_deleted } = new DetailReply(payload);
 
     // Assert
     expect(id).toEqual(payload.id);
@@ -48,5 +49,6 @@ describe('a DetailReply entity', () => {
     expect(date).toEqual(payload.date);
     expect(content).toEqual(payload.content);
     expect(comment_id).toEqual(payload.comment_id);
+    expect(is_deleted).toEqual(payload.is_deleted);
   });
 });

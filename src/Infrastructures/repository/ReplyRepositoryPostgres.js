@@ -2,6 +2,7 @@ const NotFoundError = require('../../Commons/exceptions/NotFoundError');
 const AuthorizationError = require('../../Commons/exceptions/AuthorizationError');
 const ReplyRepository = require('../../Domains/replies/ReplyRepository');
 const AddedReply = require('../../Domains/replies/entities/AddedReply');
+const DetailReply = require('../../Domains/replies/entities/DetailReply');
 
 class ReplyRepositoryPostgres extends ReplyRepository {
   constructor(pool, idGenerator) {
@@ -64,14 +65,11 @@ class ReplyRepositoryPostgres extends ReplyRepository {
 
     const result = await this._pool.query(query);
 
-    const modifiedReply = result.rows.map((reply) => {
-      if (reply.is_deleted) {
-        reply.content = '**balasan telah dihapus**';
-      }
-      return reply;
-    });
+    if (!result.rowCount) {
+      return [];
+    }
 
-    return modifiedReply;
+    return result.rows.map((reply) => new DetailReply({ ...reply }));
   }
 
   async deleteReplyById(id) {

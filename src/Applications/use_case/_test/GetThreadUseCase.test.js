@@ -135,6 +135,9 @@ describe('GetThreadUseCase', () => {
     // Assert
     expect(detailThread).toStrictEqual(expectedDetailThread);
     expect(mockThreadRepository.getThreadById).toBeCalledWith(useCasePayload.id);
+    expect(mockThreadRepository.validateThreadById).toBeCalledWith(useCasePayload.id);
+    expect(mockCommentRepository.getCommentByThreadId).toBeCalledWith(useCasePayload.id);
+    expect(mockReplyRepository.getReplyByThreadId).toBeCalledWith(useCasePayload.id);
   });
 
   it('should orchestrating the get thread action correctly with only comments', async () => {
@@ -224,6 +227,9 @@ describe('GetThreadUseCase', () => {
     // Assert
     expect(detailThread).toStrictEqual(expectedDetailThread);
     expect(mockThreadRepository.getThreadById).toBeCalledWith(useCasePayload.id);
+    expect(mockThreadRepository.validateThreadById).toBeCalledWith(useCasePayload.id);
+    expect(mockCommentRepository.getCommentByThreadId).toBeCalledWith(useCasePayload.id);
+    expect(mockReplyRepository.getReplyByThreadId).toBeCalledWith(useCasePayload.id);
   });
 
   it('should orchestrating the get thread action correctly without comments and replies', async () => {
@@ -283,5 +289,8 @@ describe('GetThreadUseCase', () => {
     // Assert
     expect(detailThread).toStrictEqual(expectedDetailThread);
     expect(mockThreadRepository.getThreadById).toBeCalledWith(useCasePayload.id);
+    expect(mockThreadRepository.validateThreadById).toBeCalledWith(useCasePayload.id);
+    expect(mockCommentRepository.getCommentByThreadId).toBeCalledWith(useCasePayload.id);
+    expect(mockReplyRepository.getReplyByThreadId).toBeCalledWith(useCasePayload.id);
   });
 });

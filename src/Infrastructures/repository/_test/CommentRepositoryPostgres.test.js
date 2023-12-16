@@ -137,6 +137,7 @@ describe('CommentRepositoryPostgres', () => {
         id: 'comment-234',
         threadId: 'thread-123',
         owner: 'user-234',
+        date: '2024',
         content: 'second comment',
       });
 
@@ -145,20 +146,22 @@ describe('CommentRepositoryPostgres', () => {
 
       // Assert
       expect(comments).toHaveLength(2);
-      expect(comments).toStrictEqual([
+      expect(comments).toEqual([
         {
           id: 'comment-123',
           username: 'dicoding',
           date: '2023',
           content: 'a content',
           is_deleted: false,
+          replies: [],
         },
         {
           id: 'comment-234',
           username: 'indonesia',
-          date: '2023',
+          date: '2024',
           content: 'second comment',
           is_deleted: false,
+          replies: [],
         },
       ]);
     });
@@ -184,13 +187,14 @@ describe('CommentRepositoryPostgres', () => {
 
       // Assert
       expect(comments).toHaveLength(2);
-      expect(comments).toStrictEqual([
+      expect(comments).toEqual([
         {
           id: 'comment-123',
           username: 'dicoding',
           date: '2023',
           content: 'a content',
           is_deleted: false,
+          replies: [],
         },
         {
           id: 'comment-234',
@@ -198,6 +202,7 @@ describe('CommentRepositoryPostgres', () => {
           date: '2024',
           content: '**komentar telah dihapus**',
           is_deleted: true,
+          replies: [],
         },
       ]);
     });

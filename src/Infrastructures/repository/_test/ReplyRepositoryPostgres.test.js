@@ -132,6 +132,47 @@ describe('ReplyRepositoryPostgres', () => {
         id: 'reply-234',
         comment_id: 'comment-123',
         owner: 'user-234',
+        date: '2024',
+        content: 'second reply',
+      });
+
+      // Action
+      const replies = await replyRepositoryPostgres.getReplyByThreadId('thread-123');
+
+      // Assert
+      expect(replies).toHaveLength(2);
+      expect(replies).toEqual([
+        {
+          id: 'reply-123',
+          username: 'dicoding',
+          date: '2023',
+          content: 'a reply',
+          comment_id: 'comment-123',
+          is_deleted: false,
+        },
+        {
+          id: 'reply-234',
+          username: 'indonesia',
+          date: '2024',
+          content: 'second reply',
+          comment_id: 'comment-123',
+          is_deleted: false,
+        },
+      ]);
+    });
+
+    it('should correctly return all detail replies from a comment including deleted reply', async () => {
+      await UsersTableTestHelper.addUser({
+        id: 'user-234',
+        username: 'indonesia',
+      });
+      const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {});
+      await RepliesTableTestHelper.addReply({});
+      await RepliesTableTestHelper.addReply({
+        id: 'reply-234',
+        comment_id: 'comment-123',
+        owner: 'user-234',
+        date: '2024',
         content: 'second reply',
       });
 
@@ -153,7 +194,7 @@ describe('ReplyRepositoryPostgres', () => {
         {
           id: 'reply-234',
           username: 'indonesia',
-          date: '2023',
+          date: '2024',
           content: 'second reply',
           comment_id: 'comment-123',
           is_deleted: false,
