@@ -52,4 +52,27 @@ describe('a DetailComment entity', () => {
     expect(is_deleted).toEqual(payload.is_deleted);
     expect(replies).toEqual(payload.replies);
   });
+
+  it('should change the content if is_deleted is TRUE', () => {
+    // Arrange
+    const payload = {
+      id: 'comment-123',
+      username: 'dicoding',
+      date: '2023',
+      content: 'a content',
+      is_deleted: true,
+      replies: [],
+    };
+
+    // Action
+    const { id, username, date, content, is_deleted, replies } = new DetailComment(payload);
+
+    // Assert
+    expect(id).toEqual(payload.id);
+    expect(username).toEqual(payload.username);
+    expect(date).toEqual(payload.date);
+    expect(content).toStrictEqual('**komentar telah dihapus**');
+    expect(is_deleted).toEqual(payload.is_deleted);
+    expect(replies).toEqual(payload.replies);
+  });
 });

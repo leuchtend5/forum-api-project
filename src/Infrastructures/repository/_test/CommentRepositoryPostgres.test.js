@@ -207,4 +207,18 @@ describe('CommentRepositoryPostgres', () => {
       ]);
     });
   });
+
+  describe('deleteCommentById function', () => {
+    it('should successfully delete the comment and change is_deleted to TRUE in database', async () => {
+      // Arrange
+      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
+
+      await CommentsTableTestHelper.addComment({});
+      await commentRepositoryPostgres.deleteCommentById('comment-123');
+
+      // Action and Assert
+      const comment = await CommentsTableTestHelper.findCommentById('comment-123');
+      expect(comment.is_deleted).toEqual(true);
+    });
+  });
 });

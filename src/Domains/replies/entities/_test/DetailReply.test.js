@@ -51,4 +51,27 @@ describe('a DetailReply entity', () => {
     expect(comment_id).toEqual(payload.comment_id);
     expect(is_deleted).toEqual(payload.is_deleted);
   });
+
+  it('should change the content if is_deleted is TRUE', () => {
+    // Arrange
+    const payload = {
+      id: 'reply-123',
+      username: 'dicoding',
+      date: '2023',
+      content: 'a content',
+      comment_id: 'comment-123',
+      is_deleted: true,
+    };
+
+    // Action
+    const { id, username, date, content, comment_id, is_deleted } = new DetailReply(payload);
+
+    // Assert
+    expect(id).toEqual(payload.id);
+    expect(username).toEqual(payload.username);
+    expect(date).toEqual(payload.date);
+    expect(content).toStrictEqual('**balasan telah dihapus**');
+    expect(comment_id).toEqual(payload.comment_id);
+    expect(is_deleted).toEqual(payload.is_deleted);
+  });
 });
