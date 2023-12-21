@@ -22,7 +22,7 @@ class ReplyRepositoryPostgres extends ReplyRepository {
 
     const result = await this._pool.query(query);
 
-    return new AddedReply({ ...result.rows[0] });
+    return new AddedReply(result.rows[0]);
   }
 
   async validateReplyById(id) {

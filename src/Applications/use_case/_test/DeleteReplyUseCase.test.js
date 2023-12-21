@@ -19,9 +19,9 @@ describe('DeleteReplyUseCase', () => {
     mockCommentRepository.validateCommentById = jest
       .fn()
       .mockImplementation(() => Promise.resolve());
-    mockReplyRepository.validateReplyById = jest.fn().mockImplementation(() => Promise.resolve());
-    mockReplyRepository.validateReplyOwner = jest.fn().mockImplementation(() => Promise.resolve());
-    mockReplyRepository.deleteReplyById = jest.fn().mockImplementation(() => Promise.resolve());
+    mockReplyRepository.validateReplyById = jest.fn(() => Promise.resolve());
+    mockReplyRepository.validateReplyOwner = jest.fn(() => Promise.resolve());
+    mockReplyRepository.deleteReplyById = jest.fn(() => Promise.resolve());
 
     /** creating use case instance */
     const deleteReplyUseCase = new DeleteReplyUseCase(mockReplyRepository, mockCommentRepository);

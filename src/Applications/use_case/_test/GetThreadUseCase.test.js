@@ -108,19 +108,13 @@ describe('GetThreadUseCase', () => {
     const mockReplyRepository = new ReplyRepository();
 
     /** mocking needed function */
-    mockThreadRepository.validateThreadById = jest.fn().mockImplementation(() => Promise.resolve());
+    mockThreadRepository.validateThreadById = jest.fn(() => Promise.resolve());
 
-    mockThreadRepository.getThreadById = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve(mockDetailThread));
+    mockThreadRepository.getThreadById = jest.fn(() => Promise.resolve(mockDetailThread));
 
-    mockCommentRepository.getCommentByThreadId = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve(commentsPayload));
+    mockCommentRepository.getCommentByThreadId = jest.fn(() => Promise.resolve(commentsPayload));
 
-    mockReplyRepository.getReplyByThreadId = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve(repliesPayload));
+    mockReplyRepository.getReplyByThreadId = jest.fn(() => Promise.resolve(repliesPayload));
 
     /** creating use case instance */
     const getThreadUseCase = new GetThreadUseCase(
@@ -200,19 +194,13 @@ describe('GetThreadUseCase', () => {
     const mockReplyRepository = new ReplyRepository();
 
     /** mocking needed function */
-    mockThreadRepository.validateThreadById = jest.fn().mockImplementation(() => Promise.resolve());
+    mockThreadRepository.validateThreadById = jest.fn(() => Promise.resolve());
 
-    mockThreadRepository.getThreadById = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve(mockDetailThread));
+    mockThreadRepository.getThreadById = jest.fn(() => Promise.resolve(mockDetailThread));
 
-    mockCommentRepository.getCommentByThreadId = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve(commentsPayload));
+    mockCommentRepository.getCommentByThreadId = jest.fn(() => Promise.resolve(commentsPayload));
 
-    mockReplyRepository.getReplyByThreadId = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve(repliesPayload));
+    mockReplyRepository.getReplyByThreadId = jest.fn(() => Promise.resolve(repliesPayload));
 
     /** creating use case instance */
     const getThreadUseCase = new GetThreadUseCase(
@@ -262,19 +250,13 @@ describe('GetThreadUseCase', () => {
     const mockReplyRepository = new ReplyRepository();
 
     /** mocking needed function */
-    mockThreadRepository.validateThreadById = jest.fn().mockImplementation(() => Promise.resolve());
+    mockThreadRepository.validateThreadById = jest.fn(() => Promise.resolve());
 
-    mockThreadRepository.getThreadById = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve(mockDetailThread));
+    mockThreadRepository.getThreadById = jest.fn(() => Promise.resolve(mockDetailThread));
 
-    mockCommentRepository.getCommentByThreadId = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve(commentsPayload));
+    mockCommentRepository.getCommentByThreadId = jest.fn(() => Promise.resolve(commentsPayload));
 
-    mockReplyRepository.getReplyByThreadId = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve(repliesPayload));
+    mockReplyRepository.getReplyByThreadId = jest.fn(() => Promise.resolve(repliesPayload));
 
     /** creating use case instance */
     const getThreadUseCase = new GetThreadUseCase(
