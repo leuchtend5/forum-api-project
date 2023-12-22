@@ -23,6 +23,8 @@
     "linebreak-style": "off",
     "quotes": "off",
     "import/no-useless-path-segments": "off",
-    "prefer-destructuring": "off"
+    "prefer-destructuring": "off",
+    "implicit-arrow-linebreak": "off",
+    "function-paren-newline": "off"
   }
 }
