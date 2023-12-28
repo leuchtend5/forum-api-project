@@ -25,6 +25,7 @@
     "import/no-useless-path-segments": "off",
     "prefer-destructuring": "off",
     "implicit-arrow-linebreak": "off",
-    "function-paren-newline": "off"
+    "function-paren-newline": "off",
+    "indent": "off"
   }
 }

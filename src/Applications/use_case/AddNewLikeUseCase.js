@@ -7,11 +7,18 @@ class AddNewLikeUseCase {
     this._threadRepository = threadRepository;
   }
 
-  async execute({ threadId, commentId, owner }) {
+  async execute({ threadId, commentId, userId }) {
     await this._threadRepository.validateThreadById(threadId);
     await this._commentRepository.validateCommentById(commentId);
-    await this._commentRepository.validateCommentOwner(owner);
-    const newLike = new NewLike({ commentId, owner });
+    const newLike = new NewLike({ commentId, owner: userId });
+    const getLikes = await this._likeRepository.getLikeByCommentId(commentId);
+    const checkLike = getLikes.some(
+      (like) => like.comment_id === commentId && like.owner === userId, // check if the user has already liked the same comment
+    );
+
+    if (checkLike) {
+      return this._likeRepository.deleteLike(newLike);
+    }
 
     return this._likeRepository.addLike(newLike);
   }

@@ -195,6 +195,7 @@ describe('/threads endpoint', () => {
                 content: 'a reply',
               },
             ],
+            likeCount: 0,
           },
         ],
       });
